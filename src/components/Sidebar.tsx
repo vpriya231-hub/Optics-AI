@@ -1,4 +1,4 @@
-import { Plus, MessageSquare, Trash2, GraduationCap, Sun, Moon, Monitor } from "lucide-react";
+import { Plus, MessageSquare, Trash2, GraduationCap, Sun, Moon, Monitor, X } from "lucide-react";
 import { ChatSession } from "../types";
 import { cn } from "../lib/utils";
 
@@ -10,6 +10,7 @@ interface SidebarProps {
   onDeleteSession: (id: string) => void;
   theme: 'light' | 'dark' | 'system';
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  onClose?: () => void;
 }
 
 export function Sidebar({
@@ -20,9 +21,20 @@ export function Sidebar({
   onDeleteSession,
   theme,
   setTheme,
+  onClose,
 }: SidebarProps) {
   return (
-    <aside className="w-80 h-full bg-[#141414] dark:bg-[#0a0a0a] text-white flex flex-col border-r border-[#2a2a2a] dark:border-[#1a1a1a]">
+    <aside className="w-80 h-full bg-[#141414] dark:bg-[#0a0a0a] text-white flex flex-col border-r border-[#2a2a2a] dark:border-[#1a1a1a] relative">
+      {/* Mobile Close Button */}
+      {onClose && (
+        <button 
+          onClick={onClose}
+          className="lg:hidden absolute top-4 right-4 p-2 text-gray-500 hover:text-white"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      )}
+
       {/* Brand Header */}
       <div className="p-6 border-bottom border-[#2a2a2a] flex items-center gap-3">
         <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
