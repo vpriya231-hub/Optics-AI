@@ -8,12 +8,15 @@ import { Sidebar } from "./components/Sidebar";
 import { ChatWindow } from "./components/ChatWindow";
 import { useChat } from "./hooks/useChat";
 import { useTheme } from "./hooks/useTheme";
-import { Menu, X } from "lucide-react";
+import { ViewState } from "./types";
+import { Menu } from "lucide-react";
 import { cn } from "./lib/utils";
 
 export default function App() {
   const { theme, setTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [view, setView] = useState<ViewState>(ViewState.TUTOR);
+  
   const {
     sessions,
     currentSession,
@@ -27,7 +30,8 @@ export default function App() {
 
   const handleSelectSession = (id: string) => {
     setCurrentSessionId(id);
-    setIsSidebarOpen(false); // Close on selection on mobile
+    setView(ViewState.TUTOR);
+    setIsSidebarOpen(false);
   };
 
   return (
@@ -50,12 +54,15 @@ export default function App() {
           onSelectSession={handleSelectSession}
           onNewChat={() => {
             createNewSession();
+            setView(ViewState.TUTOR);
             setIsSidebarOpen(false);
           }}
           onDeleteSession={deleteSession}
           theme={theme}
           setTheme={setTheme}
           onClose={() => setIsSidebarOpen(false)}
+          view={view}
+          onViewChange={setView}
         />
       </div>
 
@@ -72,9 +79,11 @@ export default function App() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xs">O</span>
             </div>
-            <span className="font-bold dark:text-white">Optics AI</span>
+            <span className="font-bold dark:text-white truncate max-w-[120px]">
+              Optics AI
+            </span>
           </div>
-          <div className="w-10" /> {/* Spacer */}
+          <div className="w-10" />
         </div>
 
         <ChatWindow 

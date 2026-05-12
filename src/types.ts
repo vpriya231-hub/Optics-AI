@@ -3,6 +3,10 @@ export enum Role {
   AI = "model",
 }
 
+export enum ViewState {
+  TUTOR = "tutor",
+}
+
 export interface Message {
   role: Role;
   content: string;
@@ -14,4 +18,11 @@ export interface ChatSession {
   title: string;
   messages: Message[];
   updatedAt: number;
+}
+
+export enum Subject {
+  PHYSICS = "Physics",
+  CHEMISTRY = "Chemistry",
+  BIOLOGY = "Biology",
+  MATHS = "Mathematics",
 }
