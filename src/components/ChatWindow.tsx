@@ -31,47 +31,49 @@ export function ChatWindow({ session, onSendMessage, isTyping }: ChatWindowProps
 
   if (!session) {
     return (
-      <div className="flex-1 bg-[#f9fafb] dark:bg-[#0a0a0a] flex flex-col items-center justify-center p-8 transition-colors duration-300">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl w-full text-center space-y-8"
-        >
-          <div className="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-blue-200 dark:shadow-blue-900/20">
-            <GraduationCap className="text-white w-10 h-10" />
-          </div>
-          <div className="space-y-4">
-            <h2 className="text-4xl font-sans font-extrabold text-gray-900 dark:text-white tracking-tight">
-              Welcome to <span className="text-blue-600">Optics AI</span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 text-lg max-w-md mx-auto">
-              Your vision for learning. I'm here to simplify concepts for NEET, JEE, and Board exams.
-            </p>
-          </div>
+      <div className="flex-1 bg-[#f9fafb] dark:bg-[#0a0a0a] overflow-y-auto custom-scrollbar transition-colors duration-300">
+        <div className="min-h-full flex flex-col items-center justify-center p-6 md:p-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-2xl w-full text-center space-y-6 md:space-y-8"
+          >
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto shadow-xl shadow-blue-200 dark:shadow-blue-900/20">
+              <GraduationCap className="text-white w-8 h-8 md:w-10 md:h-10" />
+            </div>
+            <div className="space-y-3 md:space-y-4">
+              <h2 className="text-3xl md:text-4xl font-sans font-extrabold text-gray-900 dark:text-white tracking-tight">
+                Welcome to <span className="text-blue-600">Optics AI</span>
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg max-w-md mx-auto">
+                Your vision for learning. I'm here to simplify concepts for NEET, JEE, and Board exams.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-            {[
-              { icon: BookOpen, title: "Clarify Doubts", desc: "Get deep conceptual explanations" },
-              { icon: Calculator, title: "Step-by-Step", desc: "Master numerical problems easily" },
-              { icon: Atom, title: "Analogies", desc: "Learn with real-life examples" }
-            ].map((item, i) => (
-              <div key={i} className="bg-white dark:bg-white/5 p-5 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-md transition-all">
-                <item.icon className="w-6 h-6 text-blue-600 mb-3" />
-                <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm mb-1">{item.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 text-left">
+              {[
+                { icon: BookOpen, title: "Clarify Doubts", desc: "Get deep conceptual explanations" },
+                { icon: Calculator, title: "Step-by-Step", desc: "Master numerical problems easily" },
+                { icon: Atom, title: "Analogies", desc: "Learn with real-life examples" }
+              ].map((item, i) => (
+                <div key={i} className="bg-white dark:bg-white/5 p-4 md:p-5 rounded-2xl border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-md transition-all">
+                  <item.icon className="w-5 h-5 md:w-6 h-6 text-blue-600 mb-2 md:mb-3" />
+                  <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm mb-1">{item.title}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-[11px] md:text-xs leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
 
-          <div className="pt-4">
-            <button 
-              onClick={() => onSendMessage("Hello Optics AI! Can you help me with a physics concept?")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-blue-600 text-white rounded-full font-medium hover:bg-black dark:hover:bg-blue-700 transition-colors shadow-lg shadow-gray-200 dark:shadow-blue-900/20"
-            >
-              Start Learning <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </motion.div>
+            <div className="pt-4 pb-12 md:pb-0">
+              <button 
+                onClick={() => onSendMessage("Hello Optics AI! Can you help me with a physics concept?")}
+                className="inline-flex items-center gap-2 px-8 py-4 md:px-6 md:py-3 bg-blue-600 text-white rounded-full font-bold md:font-medium hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/20 active:scale-95"
+              >
+                Start Learning <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     );
   }
